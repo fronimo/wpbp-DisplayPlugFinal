@@ -119,7 +119,7 @@ class Outdated_Notice_Public {
 	        $result->image_path;
 	        $images .=  '<li> <img src="' . $result->image_path . '"> </li>';
 	  	}
-
+/*
 	  	echo '<script>
 	  	    $(document).ready(function(){
 	  	        $(".bxslider").bxSlider();
@@ -128,7 +128,7 @@ class Outdated_Notice_Public {
 	  	    
 	  	    <ul class="bxslider">
 	  	      '.$images.'
-	  	    </ul>';
+	  	    </ul>';*/
 
 		$tmp = $images;
 		$post_content.=$tmp;
