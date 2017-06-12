@@ -95,9 +95,9 @@ class Outdated_Notice_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/outdated-notice-public.js', array( 'jquery' ), $this->version, true );
-		//wp_enqueue_script( 'slider', plugin_dir_url( __FILE__ ) . 'js/jquery.bxslider.js', array( 'jquery' ), $this->version, true );
+		//wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/outdated-notice-public.js', array( 'jquery' ), $this->version, true );
+		
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/jquery.bxslider.js', array( 'jquery' ), $this->version, true );
 
 	}
 
@@ -110,29 +110,26 @@ class Outdated_Notice_Public {
 
 	public function contenido($post_content){
 		global $wpdb;
-		$results = $wpdb->get_results("SELECT * FROM efwp_images");
-		print_r($results);
-		$images="";
-
-  		$my_results = $results;
+		$images = '';
+		$comment = '';
+		$my_results = $wpdb->get_results("SELECT * FROM efwp_images");
   		foreach ($my_results as $result) {
-	        $result->image_path;
-	        $images .=  '<li> <img src="' . $result->image_path . '"> </li>';
+	        $img = $result->image_path;
+	        $comment = $result->comment;
+	        $images .=  '<div> <img src="' . $img . '">  <h3> '.$comment.' </h3></div>';
 	  	}
-/*
-	  	echo '<script>
-	  	    $(document).ready(function(){
-	  	        $(".bxslider").bxSlider();
-	  	    });
-	  	    </script>
-	  	    
-	  	    <ul class="bxslider">
-	  	      '.$images.'
-	  	    </ul>';*/
 
-		$tmp = $images;
-		$post_content.=$tmp;
-		return $post_content;
+	  	echo '<script>jQuery(function ($) {
+		  			$(document).ready(function(){
+	        			$(".bxslider").bxSlider();
+		   				});
+					});
+			</script>
+		<ul class="bxslider">
+      		'.$images.'
+    	</ul>';
+
+		return ;
 	}
 
 
